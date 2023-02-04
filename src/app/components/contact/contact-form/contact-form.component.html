@@ -1,0 +1,130 @@
+<h1 mat-dialog-title>
+  {{ data.id ? 'Modifier' : 'Ajouter' }} un contact
+</h1>
+<div mat-dialog-content class="mat-typography">
+  <form [formGroup]="contactForm" class="form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input
+        matInput
+        placeholder="EX: DOE"
+        formControlName="lastname"
+        required
+      />
+      <mat-error *ngIf="contactForm.get('lastname')?.errors">
+        <span *ngIf="hasError('lastname', 'required')">
+          {{ 'Veuillez renseigner ce champ' }}
+        </span>
+        <span *ngIf="hasError('lastname', 'pattern')">
+          {{'Le champ doit contenir que des lettres'}}
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Prénom</mat-label>
+      <input
+        matInput
+        placeholder="EX: John"
+        formControlName="firstname"
+        required
+      />
+      <mat-error *ngIf="contactForm.get('firstname')?.errors">
+        <span *ngIf="hasError('firstname', 'required')">
+          {{ 'Veuillez renseigner ce champ' }}
+        </span>
+        <span *ngIf="hasError('firstname', 'pattern')">
+          {{ 'Le champ doit contenir que des lettres' }}
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Date de naissance</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dp"
+        formControlName="birthDay"
+        readonly
+        required
+      />
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp></mat-datepicker>
+      <mat-error *ngIf="contactForm.get('birthDay')?.errors">
+        <span *ngIf="hasError('birthDay', 'required')">
+          {{ 'Veuillez renseigner ce champ' }}
+        </span>
+        <span *ngIf="hasError('birthDay', 'date')">
+          {{ 'La date doit être au format DD/MM/YYYY' }}
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Addresse</mat-label>
+      <input
+        matInput
+        placeholder="EX: 89 rue de Richelieu, 75002, Paris"
+        formControlName="address"
+        required
+      />
+      <mat-error *ngIf="contactForm.get('address')?.errors">
+        <span *ngIf="hasError('address', 'required')">
+          {{ 'Veuillez renseigner ce champ' }}
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Téléphone</mat-label>
+      <input
+        matInput
+        placeholder="EX: (0033 ou +33 ou 0)(6 ou 7)69095232"
+        formControlName="phone"
+        required
+      />
+      <mat-error *ngIf="contactForm.get('phone')?.errors">
+        <span *ngIf="hasError('phone', 'required')">
+          {{ 'Veuillez renseigner ce champ' }}
+        </span>
+        <span *ngIf="hasError('phone', 'pattern')">
+          {{ 'Veuillez renseigner un numéro valide' }}
+        </span>
+        <span *ngIf="hasError('phone', 'phoneExists')">
+          {{ '' }}
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="EX: john.doe@mail.com"
+        formControlName="email"
+        required
+      />
+      <mat-error *ngIf="contactForm.get('email')?.errors">
+        <span *ngIf="hasError('email', 'required')">
+          {{ 'Veuillez renseigner ce champ' }}
+        </span>
+        <span *ngIf="hasError('email', 'email')">
+          {{ 'Veuillez renseigner un mail valide' }}
+        </span>
+        <span *ngIf="hasError('email', 'emailExists')">
+          {{ '' }}
+        </span>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onSubmit()">
+    <mat-icon>save</mat-icon>
+    Enregistrer
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    <mat-icon>cancel</mat-icon>
+    Annuler
+  </button>
+</div>

@@ -1,0 +1,29 @@
+<div class="content">
+  <div fxLayout="row">
+    <h1>Details sur le contact {{contact.lastname}} {{contact.firstname}}</h1>
+  </div>
+  <div fxLayout="row">
+    <div fxFlex="50">
+      <mat-list>
+        <mat-divider></mat-divider>
+        <mat-list-item><span>Nom</span> : {{contact.lastname}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><span>Prénom</span> : {{contact.firstname}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><span>Date de naissance</span> : {{this.contact.birthDay | date: 'dd/MM/yyyy'}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><span>Adresse</span> : {{contact.address}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><span>Téléphone</span> : {{contact.phone}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><span>Email</span> : {{contact.email}}</mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <a mat-button routerLink="/contacts">
+      <mat-icon>arrow_back</mat-icon> Retour à la liste des contacts
+    </a>
+  </div>
+</div>

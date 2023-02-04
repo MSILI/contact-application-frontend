@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Supprimer un contact</h1>
+<div mat-dialog-content class="mat-typography">
+  <p>
+    Souhaitez-vous supprimer le contact
+    <b>{{ data.lastname }} {{ data.firstname }}</b> ?
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onSubmit()">
+    <mat-icon>delete</mat-icon>
+    Supprimer
+  </button>
+  <button mat-button mat-dialog-close>
+    <mat-icon>cancel</mat-icon>
+    Annuler
+  </button>
+</div>
