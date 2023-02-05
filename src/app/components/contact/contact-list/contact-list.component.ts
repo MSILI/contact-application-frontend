@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatSort, Sort} from "@angular/material/sort";
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil, tap} from "rxjs";
 import {Contact} from "../../../model/contact.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
@@ -9,6 +8,7 @@ import {SearchForm} from "./search.form";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {ContactFormComponent} from "../contact-form/contact-form.component";
 import {ContactDeleteDialogComponent} from "../contact-delete-dialog/contact-delete-dialog.component";
+import {ContactUploadDialogComponent} from "../contact-upload-dialog/contact-upload-dialog.component";
 
 @Component({
   selector: 'app-contact-list',
@@ -21,7 +21,6 @@ export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
   public contacts: (Contact | undefined)[] = [];
   public displayedColumns: string[] = ['id', 'firstname', 'lastname', 'actions'];
   public searchForm: FormGroup<SearchForm>;
-  @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   constructor(private contactService: ContactService,
               private fb: FormBuilder,
@@ -60,7 +59,7 @@ export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
       ).subscribe();
   }
 
-  openBrandForm(contact?: Contact): void {
+  openContactForm(contact?: Contact): void {
     if (!contact) {
       contact = new Contact;
     }
@@ -110,6 +109,21 @@ export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
       ).subscribe()
   }
 
+  openUploadForm() {
+    const dialogRef = this.dialog.open(ContactUploadDialogComponent, {
+      width: '800px',
+    });
+    dialogRef.afterClosed()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap((result) => {
+          if (result.status === 'uploaded') {
+            this.findAll();
+          }
+        })
+      ).subscribe()
+  }
+
   onKeyboardEnter() {
     this.findAll(this.searchForm.get('query')?.value);
   }
@@ -122,6 +136,4 @@ export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
 
   }
-
-
 }

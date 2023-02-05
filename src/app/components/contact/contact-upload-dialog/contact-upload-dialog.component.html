@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Importer un fichier CSV</h1>
+<div mat-dialog-content class="mat-typography">
+  <div [formGroup]="uploadForm">
+    <input
+      hidden
+      type="file"
+      placeholder="EX: DOE"
+      formControlName="file"
+      (change)="onSelectFile($event)"
+      required
+      #fileUpload
+    />
+    <button mat-icon-button (click)="fileUpload.click()">
+      <mat-icon>attachment</mat-icon>
+    </button>
+    <span class="file-name">{{file ? file.name : 'Acun fichier n\'a été importé'}}</span>
+    <div class="text-error">
+      <span *ngIf="uploadForm.get('file')?.hasError('required')">
+        Veuillez rensigner ce champ
+      </span>
+      <span *ngIf="uploadForm.get('file')?.hasError('extensionFile')">
+        Veuillez importer un fichier avec l'extention :
+        <span *ngFor="let extension of allowedFileExtensions">{{extension + ' '}}</span>
+      </span>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onSubmit()">
+    <mat-icon>file_upload</mat-icon>
+    Importer
+  </button>
+  <button mat-button mat-dialog-close>
+    <mat-icon>cancel</mat-icon>
+    Annuler
+  </button>
+</div>

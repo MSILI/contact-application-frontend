@@ -9,9 +9,13 @@
       </form>
     </div>
     <div fxFlex="50">
-      <button mat-button (click)="openBrandForm()" class="float-right add-button">
+      <button mat-button (click)="openContactForm()" class="float-right add-button">
         <mat-icon>add_circle_outline</mat-icon>
-        Ajouter un contact
+        Ajouter
+      </button>
+      <button mat-button (click)="openUploadForm()" class="float-right add-button">
+        <mat-icon>file_upload</mat-icon>
+        Importer
       </button>
     </div>
   </div>
@@ -35,7 +39,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let row; let element">
-          <button mat-icon-button title="Modfier" (click)="openBrandForm(element)">
+          <button mat-icon-button title="Modfier" (click)="openContactForm(element)">
             <mat-icon>edit</mat-icon>
           </button>
           <a mat-icon-button color="primary" [routerLink]="['/contacts', element.id]" title="Voir détail">

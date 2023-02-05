@@ -19,13 +19,15 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {MatListModule} from "@angular/material/list";
+import { ContactUploadDialogComponent } from './contact-upload-dialog/contact-upload-dialog.component';
 
 @NgModule({
   declarations: [
     ContactListComponent,
     ContactFormComponent,
     ContactDeleteDialogComponent,
-    ContactDetailsComponent
+    ContactDetailsComponent,
+    ContactUploadDialogComponent
   ],
   imports: [
     CommonModule,
