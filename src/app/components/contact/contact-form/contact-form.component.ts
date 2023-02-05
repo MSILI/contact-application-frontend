@@ -15,6 +15,8 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   private unsubscribe$: Subject<void> = new Subject<void>();
   public contactForm: FormGroup;
+  public mailExistsErrorMessage: string = '';
+  public phoneExistsErrorMessage: string = '';
 
   constructor(private dialogRef: MatDialogRef<ContactFormComponent>,
               private contactService: ContactService,
@@ -82,10 +84,12 @@ export class ContactFormComponent implements OnInit, OnDestroy {
         error: (err: any) => {
           if (err.status === 400) {
             if (err.error.message.includes(this.contactForm.get('email')?.value)) {
-              this.contactForm.get('email')?.setErrors({emailExists: true, message: err.error.message});
+              this.mailExistsErrorMessage = err.error.message;
+              this.contactForm.get('email')?.setErrors({emailExists: true});
             }
             if (err.error.message.includes(this.contactForm.get('phone')?.value)) {
-              this.contactForm.get('phone')?.setErrors({phoneExists: true, message: err.error.message});
+              this.phoneExistsErrorMessage = err.error.message;
+              this.contactForm.get('phone')?.setErrors({phoneExists: true});
             }
           }
         }

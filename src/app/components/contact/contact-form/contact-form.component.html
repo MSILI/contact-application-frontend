@@ -13,10 +13,10 @@
       />
       <mat-error *ngIf="contactForm.get('lastname')?.errors">
         <span *ngIf="hasError('lastname', 'required')">
-          {{ 'Veuillez renseigner ce champ' }}
+          Veuillez renseigner ce champ
         </span>
         <span *ngIf="hasError('lastname', 'pattern')">
-          {{'Le champ doit contenir que des lettres'}}
+          Le champ doit contenir que des lettres
         </span>
       </mat-error>
     </mat-form-field>
@@ -31,10 +31,10 @@
       />
       <mat-error *ngIf="contactForm.get('firstname')?.errors">
         <span *ngIf="hasError('firstname', 'required')">
-          {{ 'Veuillez renseigner ce champ' }}
+          Veuillez renseigner ce champ
         </span>
         <span *ngIf="hasError('firstname', 'pattern')">
-          {{ 'Le champ doit contenir que des lettres' }}
+          Le champ doit contenir que des lettres
         </span>
       </mat-error>
     </mat-form-field>
@@ -52,10 +52,10 @@
       <mat-datepicker #dp></mat-datepicker>
       <mat-error *ngIf="contactForm.get('birthDay')?.errors">
         <span *ngIf="hasError('birthDay', 'required')">
-          {{ 'Veuillez renseigner ce champ' }}
+          Veuillez renseigner ce champ
         </span>
         <span *ngIf="hasError('birthDay', 'date')">
-          {{ 'La date doit être au format DD/MM/YYYY' }}
+          La date doit être au format DD/MM/YYYY
         </span>
       </mat-error>
     </mat-form-field>
@@ -70,7 +70,7 @@
       />
       <mat-error *ngIf="contactForm.get('address')?.errors">
         <span *ngIf="hasError('address', 'required')">
-          {{ 'Veuillez renseigner ce champ' }}
+          Veuillez renseigner ce champ
         </span>
       </mat-error>
     </mat-form-field>
@@ -85,13 +85,13 @@
       />
       <mat-error *ngIf="contactForm.get('phone')?.errors">
         <span *ngIf="hasError('phone', 'required')">
-          {{ 'Veuillez renseigner ce champ' }}
+          Veuillez renseigner ce champ
         </span>
         <span *ngIf="hasError('phone', 'pattern')">
-          {{ 'Veuillez renseigner un numéro valide' }}
+          Veuillez renseigner un numéro valide
         </span>
         <span *ngIf="hasError('phone', 'phoneExists')">
-          {{ '' }}
+          {{ phoneExistsErrorMessage }}
         </span>
       </mat-error>
     </mat-form-field>
@@ -106,13 +106,13 @@
       />
       <mat-error *ngIf="contactForm.get('email')?.errors">
         <span *ngIf="hasError('email', 'required')">
-          {{ 'Veuillez renseigner ce champ' }}
+          Veuillez renseigner ce champ
         </span>
         <span *ngIf="hasError('email', 'email')">
-          {{ 'Veuillez renseigner un mail valide' }}
+          Veuillez renseigner un mail valide
         </span>
         <span *ngIf="hasError('email', 'emailExists')">
-          {{ '' }}
+          {{ mailExistsErrorMessage }}
         </span>
       </mat-error>
     </mat-form-field>
