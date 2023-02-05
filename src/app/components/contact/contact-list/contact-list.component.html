@@ -9,13 +9,17 @@
       </form>
     </div>
     <div fxFlex="50">
-      <button mat-button (click)="openContactForm()" class="float-right add-button">
-        <mat-icon>add_circle_outline</mat-icon>
-        Ajouter
+      <button mat-button (click)="download()" class="float-right add-button">
+        <mat-icon>file_download</mat-icon>
+        Télécharger
       </button>
       <button mat-button (click)="openUploadForm()" class="float-right add-button">
         <mat-icon>file_upload</mat-icon>
         Importer
+      </button>
+      <button mat-button (click)="openContactForm()" class="float-right add-button">
+        <mat-icon>add_circle_outline</mat-icon>
+        Ajouter
       </button>
     </div>
   </div>

@@ -1,21 +1,22 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil, tap} from "rxjs";
 import {Contact} from "../../../model/contact.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ContactService} from "../../../services/contact.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {SearchForm} from "./search.form";
-import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {ContactFormComponent} from "../contact-form/contact-form.component";
 import {ContactDeleteDialogComponent} from "../contact-delete-dialog/contact-delete-dialog.component";
 import {ContactUploadDialogComponent} from "../contact-upload-dialog/contact-upload-dialog.component";
+import {CsvService} from "../../../services/csv.service";
+import {CsvHelper} from "../../../utils/csv.utils";
 
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })
-export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ContactListComponent implements OnInit, OnDestroy {
 
   private unsubscribe$: Subject<void> = new Subject<void>();
   public contacts: (Contact | undefined)[] = [];
@@ -23,8 +24,8 @@ export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
   public searchForm: FormGroup<SearchForm>;
 
   constructor(private contactService: ContactService,
+              private csvService: CsvService,
               private fb: FormBuilder,
-              private liveAnnouncer: LiveAnnouncer,
               public dialog: MatDialog) {
     this.searchForm = this.fb.group({
       query: ['', []]
@@ -128,12 +129,16 @@ export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.findAll(this.searchForm.get('query')?.value);
   }
 
+  download() {
+    this.csvService.download()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap(response => CsvHelper.downloadCSV(response))
+      ).subscribe();
+  }
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-  }
-
-  ngAfterViewInit(): void {
-
   }
 }

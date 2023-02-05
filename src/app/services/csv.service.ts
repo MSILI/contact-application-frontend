@@ -16,4 +16,8 @@ export class CsvService {
   public upload(formData: FormData): Observable<void> {
     return this.http.post<void>(`${this.resourceUrl}/upload`, formData);
   }
+
+  public download(): Observable<any> {
+    return this.http.get(`${this.resourceUrl}/download`, {responseType: 'blob'});
+  }
 }
