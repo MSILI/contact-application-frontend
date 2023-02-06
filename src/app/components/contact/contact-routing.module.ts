@@ -6,11 +6,13 @@ import {ContactDetailsComponent} from "./contact-details/contact-details.compone
 const routes: Routes = [
   {
     path: '',
-    component: ContactListComponent
+    component: ContactListComponent,
+    data: { title: 'Liste des contacts'}
   },
   {
     path: ':id',
-    component: ContactDetailsComponent
+    component: ContactDetailsComponent,
+    data: { title: 'Detail du contact'}
   }
 ];
 
