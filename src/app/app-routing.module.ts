@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./components/contact/contact.module').then((mod) => mod.ContactModule)
   },
   {
+    path: 'account',
+    loadChildren: () => import('./components/account/account.module').then((mod) => mod.AccountModule)
+  },
+  {
     path: '',
     redirectTo: '/contacts',
     pathMatch: 'full',

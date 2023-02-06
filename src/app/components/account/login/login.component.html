@@ -1,0 +1,43 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Connexion</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="loginForm" class="form">
+        <mat-error *ngIf="errorMessage" class="api-error">
+          {{errorMessage}}
+        </mat-error>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input matInput placeholder="username" formControlName="username" required>
+          <mat-error *ngIf="loginForm.get('username')?.errors">
+            <span *ngIf="hasError('username', 'required')">
+              Veuillez rensigner ce champ
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.errors">
+            <span *ngIf="hasError('password', 'required')">
+              Veuillez rensigner ce champ
+            </span>
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox color="primary" formControlName="rememberMe">Se souvenir de moi</mat-checkbox>
+        <p>
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      <button mat-stroked-button color="primary" class="btn-block" (click)="onSubmit()">Me connecter</button>
+    </mat-card-footer>
+  </mat-card>
+</div>

@@ -15,8 +15,9 @@ import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {MatLineModule} from "@angular/material/core";
 import {LoaderModule} from "./components/layouts/loader/loader.module";
-import {HttpErrorInterceptor} from "./helpers/http-error-interceptor.service";
+import {HttpErrorInterceptor} from "./helpers/http-error.interceptor";
 import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
+import {AuthInterceptor} from "./helpers/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,11 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true,
     },
     {
